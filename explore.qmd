@@ -1,0 +1,21 @@
+---
+title: "331 Final Project - Explore"
+author: "Sammy Paykel, Abigayle Mercer, Justin Koida"
+date: "2/18/2025"
+format: 
+  html:
+    self-contained: true
+    code-fold: true
+    code-tools: true
+    embed-resources: true
+    toc: true
+    theme: lux
+editor: 
+  source: true
+execute:
+  echo: true
+  error: false
+  output: false
+  message: false
+  warning: false
+---
