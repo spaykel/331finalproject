@@ -19,3 +19,10 @@ execute:
   message: false
   warning: false
 ---
+
+```{r setup}
+library(tidyverse)
+
+pop <- read_csv("data/pop.csv")
+```
+
