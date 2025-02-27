@@ -1,7 +1,8 @@
 ---
-title: "331 Final Project - Explore"
-author: "Sammy Paykel, Abigayle Mercer, Justin Koida"
-date: "2/18/2025"
+title: "331 Final Project - Project Proposal"
+subtitle: "Can Money Buy Happiness?"
+author: "Justin Koida, Abigayle Mercer, Sammy Paykel"
+date: "2/26/2025"
 format: 
   html:
     self-contained: true
@@ -20,9 +21,66 @@ execute:
   warning: false
 ---
 
+### 1.0 // Introduction
+
+##### Data description: 
+
+Country: Country 
+
+Year: Year
+
+Poverty: 
+The percentage of the population in poverty (0-100). Poverty here is defined as living off of less than $3.65 per day. This is not adjusted for inflation. 
+
+Happiness Score: 
+Happiness as a percent indicated by WHR. The World Happiness Report (WHR) is scored from the national average response to the questions of life evaluations. 
+
+Observational Unit: Country and Year
+
+##### Hypothesis: 
+Happiness and Poverty levels are linearly correlated. So we hypothesize that money can buy happiness. 
+
+##### Data cleaning process and decision: 
+We chose to drop all observations with na values, we may go back later and choose to do some data imputation to keep more data. However, we found ththat dropping na resulted in a loss of ~800 data points from the original 3200. 
+
+### 1.1 // Data
 ```{r setup}
 library(tidyverse)
+library(DT)
 
 pop <- read_csv("data/pop.csv")
+hap <- read_csv("data/hapiscore_whr.csv")
+pov <- read_csv("data/gm_365pov_rate.csv")
+```
+
+### 1.2, 1.3, 1.4, 1.5 // Data Cleaning and Joining
+```{r data-cleaning}
+#| output: true
+
+clean_hap <- hap |>
+  pivot_longer(cols = `2005`:`2023`,
+               names_to = "Year",
+               values_to = "Happiness") |>
+  rename(Country = country) |>
+  drop_na()
+
+clean_pov <- pov |>
+  select(`2005`:`2023`, country) |>
+  pivot_longer(cols = `2005`:`2023`,
+               names_to = "Year",
+               values_to = "Poverty") |>
+  rename(Country = country) |>
+  drop_na()
+
+joined_pov_hap <- clean_hap |>
+  inner_join(clean_pov, by = join_by(Country == Country, Year == Year))
+
+datatable(joined_pov_hap, 
+          caption = htmltools::tags$caption(
+            style = 'caption-side: top; text-align: left; font-size: 24px;',
+            "Poverty and Happiness Data, Joined by Country and Year"
+          ), 
+          options = list(pageLength = 10)
+          )
 ```
 
