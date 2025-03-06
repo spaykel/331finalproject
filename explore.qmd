@@ -1,5 +1,5 @@
 ---
-title: "331 Final Project - Project Proposal"
+title: "331 Final Project"
 subtitle: "Can Money Buy Happiness?"
 author: "Justin Koida, Abigayle Mercer, Sammy Paykel"
 date: "2/26/2025"
