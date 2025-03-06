@@ -86,12 +86,10 @@ datatable(joined_pov_hap,
           )
 ```
 
+### 2.0 // Linear Regression
+
 ```{r}
-
 #| label: trend-over-time
-#| output: true
-
-#| label: happiness-poverty-ratio-over-time
 #| output: true
 
 # Create a new variable: Happiness/Poverty ratio
@@ -112,6 +110,9 @@ ggplot(joined_pov_hap, aes(x = as.factor(Year), y = Hap_Pov_Ratio)) +
 ```
 
 ```{r}
+#| label: happiness-poverty-ratio-over-time
+#| output: true
+
 pov_hap_avg <- joined_pov_hap |>
   group_by(Country) |>
   summarize(Avg_Happiness = mean(Happiness, na.rm = TRUE),
