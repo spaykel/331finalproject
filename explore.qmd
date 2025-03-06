@@ -138,21 +138,29 @@ summary(model)
 ##### 2.3 // Model Fit
 
 ```{r 2.3}
+#| output: true
 # print(tibble(predict(model)))
 
-pre_var = joined_pov_hap |>
+pre_variance = joined_pov_hap |>
   select(Happiness) |>
   mutate(predicted_happiness = predict(model)) |>
   mutate(residual = Happiness - predicted_happiness)
 
-variances = pre_var |>
-  mutate(happiness_var = var(Happiness), 
-         predicted_var = var(predicted_happiness),
-         residual_var = var(residual)) |>
-  select(happiness_var, predicted_var, residual_var) |>
+variances = pre_variance |>
+  mutate(happiness_variance = var(Happiness), 
+         predicted_variance = var(predicted_happiness),
+         residual_variance = var(residual)) |>
+  select(happiness_variance, predicted_variance, residual_variance) |>
   head(1)
 
-print(variances)
+knitr::kable(variances)
 ```
 
+###### Model Fit Analysis
 
+The linear regression model predicting Happiness from Poverty produced an \( R^2 \) value of 0.5536, meaning it explains ~55.4% of the variation in happiness.
+
+###### Interpretation:
+- The negative coefficient for Poverty (-0.239) suggests a moderate inverse relationship: as poverty increases, happiness tends to decrease.
+- The model is statistically significant (\( p < 2.2 * 10^{-16} \)).
+- However, about 45% of the variance remains unexplained, indicating other factors (e.g., GDP, social policies) likely influence happiness.
