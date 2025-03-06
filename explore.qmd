@@ -135,6 +135,7 @@ Linear Regression is a supervised machine learning technique to learn the relati
 source: <https://www.geeksforgeeks.org/ml-linear-regression/>
 
 ```{r 2.2}
+#| output: true
 model <- lm(Happiness ~ Poverty, data = joined_pov_hap) #https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/predict.lm
 summary(model)
 ```
