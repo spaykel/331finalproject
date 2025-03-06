@@ -23,27 +23,28 @@ execute:
 
 ### 1.0 // Introduction
 
-##### Data description: 
+##### Data description:
 
-Country: Country 
+Country: Country
 
 Year: Year
 
-Poverty: 
-The percentage of the population in poverty (0-100). Poverty here is defined as living off of less than $3.65 per day. This is not adjusted for inflation. 
+Poverty: The percentage of the population in poverty (0-100). Poverty here is defined as living off of less than \$3.65 per day. This is not adjusted for inflation.
 
-Happiness Score: 
-Happiness as a percent indicated by WHR. The World Happiness Report (WHR) is scored from the national average response to the questions of life evaluations. 
+Happiness Score: Happiness as a percent indicated by WHR. The World Happiness Report (WHR) is scored from the national average response to the questions of life evaluations.
 
 Observational Unit: Country and Year
 
-##### Hypothesis: 
-Happiness and Poverty levels are linearly correlated. So we hypothesize that money can buy happiness. 
+##### Hypothesis:
 
-##### Data cleaning process and decision: 
-We chose to drop all observations with na values, we may go back later and choose to do some data imputation to keep more data. However, we found ththat dropping na resulted in a loss of ~800 data points from the original 3200. 
+Happiness and Poverty levels are linearly correlated. So we hypothesize that money can buy happiness.
+
+##### Data cleaning process and decision:
+
+We chose to drop all observations with na values, we may go back later and choose to do some data imputation to keep more data. However, we found ththat dropping na resulted in a loss of \~800 data points from the original 3200.
 
 ### 1.1 // Data
+
 ```{r setup}
 library(tidyverse)
 library(DT)
@@ -54,6 +55,7 @@ pov <- read_csv("data/gm_365pov_rate.csv")
 ```
 
 ### 1.2, 1.3, 1.4, 1.5 // Data Cleaning and Joining
+
 ```{r data-cleaning}
 #| output: true
 
@@ -84,3 +86,43 @@ datatable(joined_pov_hap,
           )
 ```
 
+```{r}
+
+#| label: trend-over-time
+#| output: true
+
+#| label: happiness-poverty-ratio-over-time
+#| output: true
+
+# Create a new variable: Happiness/Poverty ratio
+joined_pov_hap <- joined_pov_hap |>
+  mutate(Hap_Pov_Ratio = Happiness / Poverty)
+
+# Plot boxplots of the ratio over time
+ggplot(joined_pov_hap, aes(x = as.factor(Year), y = Hap_Pov_Ratio)) +
+  geom_boxplot(fill = "lightblue", alpha = 0.6) +  # Boxplots without outliers
+  geom_jitter(width = 0.2, alpha = 0.3, color = "blue") +  # Jitter for individual points
+  
+  labs(title = "Distribution of Happiness/Poverty Ratio Over Time",
+       x = "Year",
+       y = "Happiness / Poverty Ratio") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
+
+```
+
+```{r}
+pov_hap_avg <- joined_pov_hap |>
+  group_by(Country) |>
+  summarize(Avg_Happiness = mean(Happiness, na.rm = TRUE),
+            Avg_Poverty = mean(Poverty, na.rm = TRUE), .groups = "drop")
+
+# Scatterplot with one observation per country
+ggplot(pov_hap_avg, aes(x = Avg_Poverty, y = Avg_Happiness)) +
+  geom_point(alpha = 0.6, color = "darkblue") +
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(title = "Averaged Relationship Between Happiness and Poverty",
+       x = "Average Poverty Rate (%)",
+       y = "Average Happiness Score (%)") +
+  theme_minimal()
+```
