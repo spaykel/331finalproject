@@ -88,6 +88,8 @@ datatable(joined_pov_hap,
 
 ### 2.0 // Linear Regression
 
+Displays the natural log of the ratio of the Happiness score and Poverty given year. Taking the natural log minimizes the impact for the skewness of the data, and accounts for severe outliers. The general trend of the ratio shows that either happiness increases over time or that poverty decreases:
+
 ```{r}
 #| label: trend-over-time-facet
 #| output: true
@@ -111,6 +113,8 @@ ggplot(joined_pov_hap, aes(x = as.factor(Year), y = Log_Hap_Pov_Ratio)) +
 
 ```
 
+Displays the relationship between the poverty rate and happiness score averaged over the years 2005 to 2023 where each point represents a different country. The general trend of points indicates that there is a negative relationship between poverty rate and happiness score; countries with higher poverty rates have lower happiness scores:
+
 ```{r}
 #| label: happiness-poverty-ratio-over-time
 #| output: true
@@ -123,7 +127,7 @@ pov_hap_avg <- joined_pov_hap |>
 # Scatterplot with one observation per country
 ggplot(pov_hap_avg, aes(x = Avg_Poverty, y = Avg_Happiness)) +
   geom_point(alpha = 0.6, color = "darkblue") +
-  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  # geom_smooth(method = "lm", color = "red", se = FALSE) +
   labs(title = "Averaged Relationship Between Happiness and Poverty",
        x = "Average Poverty Rate (%)",
        y = "Average Happiness Score (%)") +
