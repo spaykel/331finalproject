@@ -89,21 +89,23 @@ datatable(joined_pov_hap,
 ### 2.0 // Linear Regression
 
 ```{r}
-#| label: trend-over-time
+#| label: trend-over-time-facet
 #| output: true
 
 # Create a new variable: Happiness/Poverty ratio
 joined_pov_hap <- joined_pov_hap |>
-  mutate(Hap_Pov_Ratio = Happiness / Poverty)
+  mutate(Hap_Pov_Ratio = Happiness / Poverty) |>
+  mutate(Log_Hap_Pov_Ratio = log(Hap_Pov_Ratio))
 
 # Plot boxplots of the ratio over time
-ggplot(joined_pov_hap, aes(x = as.factor(Year), y = Hap_Pov_Ratio)) +
-  geom_boxplot(fill = "lightblue", alpha = 0.6) +  # Boxplots without outliers
-  geom_jitter(width = 0.2, alpha = 0.3, color = "blue") +  # Jitter for individual points
+ggplot(joined_pov_hap, aes(x = as.factor(Year), y = Log_Hap_Pov_Ratio)) +
+  #scale_y_continuous(limits = quantile(joined_pov_hap$Log_Hap_Pov_Ratio, c(.1, .9))) +
+  geom_boxplot(fill = "lightblue", alpha = 0.6, outliers = FALSE, outliers.shape = NA) +  # Boxplots without outliers
+  #geom_jitter(width = 0.2, alpha = 0.3, color = "blue") +  # Jitter for individual points
   
-  labs(title = "Distribution of Happiness/Poverty Ratio Over Time",
+  labs(title = "Distribution of the Natural Log of Happiness/Poverty Ratio Over Time",
        x = "Year",
-       y = "Happiness / Poverty Ratio") +
+       y = "Ln(Happiness / Poverty Ratio)") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  
 
