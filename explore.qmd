@@ -131,7 +131,7 @@ ggplot(pov_hap_avg, aes(x = Avg_Poverty, y = Avg_Happiness)) +
 ##### 2.2 // Linear Regression
 
 ```{r 2.2}
-model <- lm(Happiness ~ Poverty, data = joined_pov_hap)
+model <- lm(Happiness ~ Poverty, data = joined_pov_hap) #https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/predict.lm
 summary(model)
 ```
 
@@ -143,10 +143,10 @@ summary(model)
 
 pre_variance = joined_pov_hap |>
   select(Happiness) |>
-  mutate(predicted_happiness = predict(model)) |>
+  mutate(predicted_happiness = predict(model)) |> # https://www.math.ucla.edu/~anderson/rw1001/library/base/html/predict.lm.html#:~:text=lm%20produces%20predicted%20values%2C%20obtained,of%20the%20predictions%20are%20calculated.
   mutate(residual = Happiness - predicted_happiness)
 
-variances = pre_variance |>
+variances = pre_variance |> # https://www.marsja.se/variance-in-r-how-to-find-calculate/
   mutate(happiness_variance = var(Happiness), 
          predicted_variance = var(predicted_happiness),
          residual_variance = var(residual)) |>
