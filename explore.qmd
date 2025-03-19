@@ -173,12 +173,12 @@ knitr::kable(variances)
 
 ###### Model Fit Analysis
 
-The linear regression model predicting Happiness from Poverty produced an ( R\^2 ) value of 0.5536, meaning it explains \~55.4% of the variation in happiness.
+The linear regression model predicting Happiness from Poverty produced an R\^2 value of 0.5536, meaning it explains \~55.4% of the variation in happiness.
 
 ###### Interpretation:
 
 -   The negative coefficient for Poverty (-0.239) suggests a moderate inverse relationship: as poverty increases, happiness tends to decrease.
--   The model is statistically significant (( p \< 2.2 \* 10\^{-16} )).
+-   The model is statistically significant p \< 2.2 \* 10\^-16.
 -   However, about 45% of the variance remains unexplained, indicating other factors (e.g., GDP, social policies) likely influence happiness.
 
 ### 3.0 // Simulation
@@ -187,7 +187,7 @@ The linear regression model predicting Happiness from Poverty produced an ( R\^2
 
 ```{r 3.1}
 #| output: true
-set.seed(123)
+set.seed(1901)
 
 predicted_values <- predict(model)
 
@@ -214,12 +214,16 @@ library(gridExtra)
 #grid.arrange(p1, p2, ncol = 2)
 ```
 
+<<<<<<< HEAD
+=======
+The plot on the left displays the observed relationship between happiness and poverty, showing a clear negative association—as poverty increases, happiness tends to decrease. The plot on the right shows simulated data generated from our model by taking predicted values from the regression and adding random error based on the residual standard error.
+>>>>>>> 16185bb9add26314eb73b14e5da15e160df0eb6d
 
 ##### 3.2 // Multiple Predictive Checks
 
 ```{r 3.2}
 #| output: true
-set.seed(321)
+set.seed(1969)
 
 num_simulations <- 1000
 r_squared_values <- numeric(num_simulations)
@@ -243,4 +247,7 @@ ggplotly(r_squared_hist)
 
 
 ###### Analysis of Simulated Predictive Checks
-- The distribution of simulated R^2 values is similar to the observed model R^2, suggesting our model is a reasonable fit for the data.
+
+To evaluate the overall performance of our model, we conducted 1,000 simulations each time generating new simulated happiness scores using our model and calculating the R-squared valuefrom a regression of simulated data on poverty.
+
+The histogram above shows the distribution of R-squared values from these simulations. We see that most R-squared values fall within a narrow band (e.g., around 0.54-0.57), consistent with our original model’s R-squared. This supports the idea that our model does consistendly explain a similar amount of variance in the data across different simulated datasets.
