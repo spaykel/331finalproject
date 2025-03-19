@@ -2,7 +2,7 @@
 title: "331 Final Project"
 subtitle: "Can Money Buy Happiness?"
 author: "Justin Koida, Abigayle Mercer, Sammy Paykel"
-date: "2/26/2025"
+date: "3/18/2025"
 format: 
   html:
     self-contained: true
@@ -214,10 +214,7 @@ library(gridExtra)
 #grid.arrange(p1, p2, ncol = 2)
 ```
 
-<<<<<<< HEAD
-=======
 The plot on the left displays the observed relationship between happiness and poverty, showing a clear negative association—as poverty increases, happiness tends to decrease. The plot on the right shows simulated data generated from our model by taking predicted values from the regression and adding random error based on the residual standard error.
->>>>>>> 16185bb9add26314eb73b14e5da15e160df0eb6d
 
 ##### 3.2 // Multiple Predictive Checks
 
@@ -251,3 +248,13 @@ ggplotly(r_squared_hist)
 To evaluate the overall performance of our model, we conducted 1,000 simulations each time generating new simulated happiness scores using our model and calculating the R-squared valuefrom a regression of simulated data on poverty.
 
 The histogram above shows the distribution of R-squared values from these simulations. We see that most R-squared values fall within a narrow band (e.g., around 0.54-0.57), consistent with our original model’s R-squared. This supports the idea that our model does consistendly explain a similar amount of variance in the data across different simulated datasets.
+
+##### 3.3 // Additional Options
+
+While completing our final project, we utilized options A, C, and D.
+
+Option A: We collaborated over Github, which can be found at this link: `https://github.com/spaykel/331finalproject`
+
+Option C: We formatted our tables nicely using DT and Kable. 
+
+Option D: We animated our plots using ggplotly. Hover over some of our plots to see more information on the data!
