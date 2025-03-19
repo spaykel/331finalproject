@@ -231,5 +231,4 @@ ggplot(r_squared_df, aes(x = R_Squared)) +
 ```
 
 ###### Analysis of Simulated Predictive Checks
-- If the distribution of simulated R^2 values is similar to the observed model R^2, this suggests our model is a reasonable fit for the data.
-- If the observed R^2 falls far outside the simulated distribution, our model may be missing key variables or interactions.
+- The distribution of simulated R^2 values is similar to the observed model R^2, suggesting our model is a reasonable fit for the data.
