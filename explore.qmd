@@ -48,8 +48,6 @@ We chose to drop all observations with na values, we may go back later and choos
 ```{r setup}
 library(tidyverse)
 library(DT)
-library(gganimate)
-library(gifski)
 library(plotly)
 library(gridExtra)
 
@@ -234,13 +232,13 @@ for (i in 1:num_simulations) {
 
 r_squared_df <- tibble(R_Squared = r_squared_values)
 
-plot3<-ggplot(r_squared_df, aes(x = R_Squared)) +
+r_squared_hist <- ggplot(r_squared_df, aes(x = R_Squared)) +
   geom_histogram(binwidth = 0.02, fill = "purple", alpha = 0.7, color = "black") +
   labs(title = "Distribution of R-Squared from Simulated Regressions",
        x = "R-Squared", y = "Frequency") +
   theme_minimal()
 
-ggplotly(plot3)
+ggplotly(r_squared_hist)
 ```
 
 
