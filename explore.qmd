@@ -169,12 +169,12 @@ knitr::kable(variances)
 
 ###### Model Fit Analysis
 
-The linear regression model predicting Happiness from Poverty produced an ( R\^2 ) value of 0.5536, meaning it explains \~55.4% of the variation in happiness.
+The linear regression model predicting Happiness from Poverty produced an R\^2 value of 0.5536, meaning it explains \~55.4% of the variation in happiness.
 
 ###### Interpretation:
 
 -   The negative coefficient for Poverty (-0.239) suggests a moderate inverse relationship: as poverty increases, happiness tends to decrease.
--   The model is statistically significant (( p \< 2.2 \* 10\^{-16} )).
+-   The model is statistically significant p \< 2.2 \* 10\^-16.
 -   However, about 45% of the variance remains unexplained, indicating other factors (e.g., GDP, social policies) likely influence happiness.
 
 ### 3.0 // Simulation
