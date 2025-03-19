@@ -206,6 +206,8 @@ library(gridExtra)
 grid.arrange(p1, p2, ncol = 2)
 ```
 
+The plot on the left displays the observed relationship between happiness and poverty, showing a clear negative association—as poverty increases, happiness tends to decrease. The plot on the right shows simulated data generated from our model by taking predicted values from the regression and adding random error based on the residual standard error.
+
 ##### 3.2 // Multiple Predictive Checks
 
 ```{r 3.2}
@@ -231,4 +233,7 @@ ggplot(r_squared_df, aes(x = R_Squared)) +
 ```
 
 ###### Analysis of Simulated Predictive Checks
-- The distribution of simulated R^2 values is similar to the observed model R^2, suggesting our model is a reasonable fit for the data.
+
+To evaluate the overall performance of our model, we conducted 1,000 simulations each time generating new simulated happiness scores using our model and calculating the R-squared valuefrom a regression of simulated data on poverty.
+
+The histogram above shows the distribution of R-squared values from these simulations. We see that most R-squared values fall within a narrow band (e.g., around 0.54-0.57), consistent with our original model’s R-squared. This supports the idea that our model does consistendly explain a similar amount of variance in the data across different simulated datasets.
