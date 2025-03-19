@@ -48,6 +48,8 @@ We chose to drop all observations with na values, we may go back later and choos
 ```{r setup}
 library(tidyverse)
 library(DT)
+library(plotly)
+library(gridExtra)
 
 pop <- read_csv("data/pop.csv")
 hap <- read_csv("data/hapiscore_whr.csv")
@@ -125,13 +127,15 @@ pov_hap_avg <- joined_pov_hap |>
             Avg_Poverty = mean(Poverty, na.rm = TRUE), .groups = "drop")
 
 # Scatterplot with one observation per country
-ggplot(pov_hap_avg, aes(x = Avg_Poverty, y = Avg_Happiness)) +
+scatter_plot <- ggplot(pov_hap_avg, aes(x = Avg_Poverty, y = Avg_Happiness)) +
   geom_point(alpha = 0.6, color = "darkblue") +
   # geom_smooth(method = "lm", color = "red", se = FALSE) +
   labs(title = "Averaged Relationship Between Happiness and Poverty",
        x = "Average Poverty Rate (%)",
        y = "Average Happiness Score (%)") +
   theme_minimal()
+
+ggplotly(scatter_plot)
 ```
 
 ##### 2.2 // Linear Regression
@@ -202,11 +206,18 @@ p2 <- ggplot(simulated_data, aes(x = Poverty, y = Simulated_Happiness)) +
   labs(title = "Simulated Happiness vs. Poverty", x = "Poverty", y = "Simulated Happiness") +
   theme_minimal()
 
+interactive_plot1 <- ggplotly(p1)
+interactive_plot2 <- ggplotly(p2)
+
+subplot(interactive_plot1, interactive_plot2, nrows = 1, margin = 0.025)
 library(gridExtra)
-grid.arrange(p1, p2, ncol = 2)
+#grid.arrange(p1, p2, ncol = 2)
 ```
 
+<<<<<<< HEAD
+=======
 The plot on the left displays the observed relationship between happiness and poverty, showing a clear negative association—as poverty increases, happiness tends to decrease. The plot on the right shows simulated data generated from our model by taking predicted values from the regression and adding random error based on the residual standard error.
+>>>>>>> 16185bb9add26314eb73b14e5da15e160df0eb6d
 
 ##### 3.2 // Multiple Predictive Checks
 
@@ -225,12 +236,15 @@ for (i in 1:num_simulations) {
 
 r_squared_df <- tibble(R_Squared = r_squared_values)
 
-ggplot(r_squared_df, aes(x = R_Squared)) +
+r_squared_hist <- ggplot(r_squared_df, aes(x = R_Squared)) +
   geom_histogram(binwidth = 0.02, fill = "purple", alpha = 0.7, color = "black") +
   labs(title = "Distribution of R-Squared from Simulated Regressions",
        x = "R-Squared", y = "Frequency") +
   theme_minimal()
+
+ggplotly(r_squared_hist)
 ```
+
 
 ###### Analysis of Simulated Predictive Checks
 
