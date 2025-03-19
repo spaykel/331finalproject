@@ -183,7 +183,7 @@ The linear regression model predicting Happiness from Poverty produced an ( R\^2
 
 ```{r 3.1}
 #| output: true
-set.seed(123)
+set.seed(1901)
 
 predicted_values <- predict(model)
 
@@ -210,7 +210,7 @@ grid.arrange(p1, p2, ncol = 2)
 
 ```{r 3.2}
 #| output: true
-set.seed(321)
+set.seed(1969)
 
 num_simulations <- 1000
 r_squared_values <- numeric(num_simulations)
