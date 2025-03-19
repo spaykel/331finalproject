@@ -210,7 +210,7 @@ grid.arrange(p1, p2, ncol = 2)
 
 ```{r 3.2}
 #| output: true
-set.seed(321)  # For reproducibility
+set.seed(321)
 
 num_simulations <- 1000
 r_squared_values <- numeric(num_simulations)
@@ -221,7 +221,6 @@ for (i in 1:num_simulations) {
   r_squared_values[i] <- summary(temp_model)$r.squared
 }
 
-# Plot R-squared distribution
 r_squared_df <- tibble(R_Squared = r_squared_values)
 
 ggplot(r_squared_df, aes(x = R_Squared)) +
@@ -232,5 +231,5 @@ ggplot(r_squared_df, aes(x = R_Squared)) +
 ```
 
 ###### Analysis of Simulated Predictive Checks
-- If the distribution of simulated \( R^2 \) values is similar to the observed model \( R^2 \), this suggests our model is a reasonable fit for the data.
-- If the observed \( R^2 \) falls far outside the simulated distribution, our model may be missing key variables or interactions.
+- If the distribution of simulated R^2 values is similar to the observed model R^2, this suggests our model is a reasonable fit for the data.
+- If the observed R^2 falls far outside the simulated distribution, our model may be missing key variables or interactions.
