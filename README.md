@@ -5,10 +5,8 @@ This project analyzes the relationship between **poverty rates** and **happiness
 
 ## Methodology
 - **Data Cleaning**: Pivoted long format, removed NA values, joined datasets by country & year.
-- **Regression Model**: 
-  \[ \text{Happiness} = \beta_0 + \beta_1 \times \text{Poverty} + \epsilon \]
-  Evaluated with **\( R^2 \)**, coefficient analysis, and variance decomposition.
-- **Simulation**: Generated predictions, added noise, ran **1000 simulations**, and analyzed \( R^2 \) distribution.
+- **Regression Model**: Assessed the relationship between poverty and happiness using linear regression, evaluating model fit with R^2, coefficient analysis, and variance decomposition.
+- **Simulation**: Generated predictions, added noise, ran **1000 simulations**, and analyzed R^2 distribution.
 
 ## Key Findings
 - **Moderate inverse relationship**: Higher poverty correlates with lower happiness.
